@@ -415,5 +415,51 @@
 	}
 	</script>
 
+<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+  // Function to show/hide success message
+  function showMsg(flag) {
+    if (flag == 0) {
+      $('.successBox').css('display', 'block');
+    } else {
+      $('.successBox').css('display', 'none');
+    }
+  }
+
+  // Event listener for form submission
+  $(document).ready(function() {
+    // Handle form submission
+    $('form').on('submit', function(e) {
+      e.preventDefault(); // Prevent form submission
+
+      // Get all form field values
+      var name = $('#name').val();
+      var email = $('#email').val();
+      var phone = $('#number').val();
+      var subject = $('input[name="subject"]').val();
+      var department = $('select[name="Department"]').val();
+      var date = $('input[type="date"]').val();
+      var time = $('select[name="Time"]').val();
+
+      // Create an object to hold the form data
+      var appointmentData = {
+        name: name,
+        email: email,
+        phone: phone,
+        subject: subject,
+        department: department,
+        date: date,
+        time: time
+      };
+
+      // Store the form data in localStorage
+      localStorage.setItem('appointmentDetails', JSON.stringify(appointmentData));
+
+      // Show success message
+      showMsg(0);
+    });
+  });
+</script>
+
 </body>
 </html>

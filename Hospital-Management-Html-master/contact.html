@@ -384,6 +384,43 @@
 	$('.successBox').css('display', 'none');
 	}
 	}
+
+	document.addEventListener("DOMContentLoaded", function () {
+    // Populate form fields if data exists in local storage
+    const savedData = JSON.parse(localStorage.getItem("contact"));
+    if (savedData) {
+        document.getElementById("name").value = savedData.name || "";
+        document.getElementById("email").value = savedData.email || "";
+        document.getElementById("subject").value = savedData.subject || "";
+        document.getElementById("number").value = savedData.number || "";
+        document.getElementById("message").value = savedData.message || "";
+    }
+
+    // Save data to local storage on form submission
+    document.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form from submitting
+        const contactData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            subject: document.getElementById("subject").value,
+            number: document.getElementById("number").value,
+            message: document.getElementById("message").value,
+        };
+        localStorage.setItem("contact", JSON.stringify(contactData));
+        showMsg(0); // Show success message
+        this.reset(); // Optional: Reset the form fields
+    });
+});
+
+function showMsg(flag) {
+    if (flag === 0) {
+        document.querySelector('.successBox').style.display = 'block';
+    } else {
+        document.querySelector('.successBox').style.display = 'none';
+    }
+}
+
+	
 	</script>
 
 </body>

@@ -183,22 +183,21 @@
 				</div>
 
 				<label>First Name</label>
-				<input type="text" class="form-control " style="margin-bottom: 20px;" required="">
+				<input type="text" class="form-control " name="firstName" style="margin-bottom: 20px;" required="">
 
 				<label>Last Name</label>
-				<input type="text" class="form-control " style="margin-bottom: 20px;" required="">
+				<input type="text" class="form-control " name="lastName" style="margin-bottom: 20px;" required="">
 
 				<label>Email Address <span class="color-red">*</span></label>
-				<input type="text" class="form-control " style="margin-bottom: 20px;" required="">
+				<input type="text" class="form-control " name="email" style="margin-bottom: 20px;" required="">
 
 				<div class="row">
 				<div class="col-sm-6">
 				<label>Password <span class="color-red">*</span></label>
-				<input type="password" class="form-control " style="margin-bottom: 20px;" required="">
+				<input type="password" class="form-control " name="password"  style="margin-bottom: 20px;" required="">
 				</div>
-				<div class="col-sm-6">
-				<label>Confirm Password <span class="color-red">*</span></label>
-				<input type="password" class="form-control " style="margin-bottom: 20px;" required="">
+				<div class="col-sm-6">				<label>Confirm Password <span class="color-red">*</span></label>
+				<input type="password" class="form-control " name="confirmPassword"  style="margin-bottom: 20px;" required="">
 				</div>
 				</div>
 				<div class="alert alert-success successBox">
@@ -349,7 +348,49 @@
 	$('.successBox').css('display', 'none');
 	}
 	}
+	
+	
 	</script>
+	<script type="text/javascript">
+		function showMsg(flag){
+			if(flag == 0){
+				$('.successBox').css('display', 'block');
+			} else {
+				$('.successBox').css('display', 'none');
+			}
+		}
+		
+		document.querySelector('.reg-page').addEventListener('submit', function(event) {
+			event.preventDefault(); // Prevent form submission
+		
+			// Get form data
+			const firstName = document.querySelector('input[name="firstName"]').value;
+			const lastName = document.querySelector('input[name="lastName"]').value;
+			const email = document.querySelector('input[name="email"]').value;
+			const password = document.querySelector('input[name="password"]').value;
+			const confirmPassword = document.querySelector('input[name="confirmPassword"]').value;
+		
+			// Check if passwords match
+			if (password !== confirmPassword) {
+				alert("Passwords do not match!");
+				return;
+			}
+		
+			// Store data in localStorage
+			localStorage.setItem('registrationData', JSON.stringify({
+				firstName: firstName,
+				lastName: lastName,
+				email: email,
+				password: password
+			}));
+		
+			// Show success message
+			showMsg(0);
+		});
+
+	
+		</script>
+		
 
 </body>
 </html>
